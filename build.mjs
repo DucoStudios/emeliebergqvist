@@ -163,6 +163,20 @@ function kort(p, typ) {
 </a>`;
 }
 
+// Bildremsa från vardagen, samma på start, om och samarbeten.
+const GALLERI = [
+  ["kanalen.jpg", "Kanal i en sydfransk stad i kvällsljus"],
+  ["granden.jpg", "Gränd med gröna fönsterluckor och krukväxter"],
+  ["kakel.jpg", "Sandaler på gammalt mönstrat kakel"],
+  ["oleander.jpg", "Blommande oleander över en stenmur"],
+  ["vandring.jpg", "Emelie vandrar i garrigue vid havet"],
+  ["palm.jpg", "Palm mot blå himmel"],
+  ["landskap.jpg", "Utsikt över vingårdar och en lagun"]
+];
+const galleri = () => `<section class="galleri" aria-label="Från vardagen"><div class="inner"><p class="overrubrik">Från vardagen</p></div>
+<div class="galleri-rad">${GALLERI.map(([f, alt]) => `<img src="/bilder/${f}" alt="${esc(alt)}" loading="lazy">`).join("")}</div>
+</section>`;
+
 const lista = (poster, typ, tom) => poster.length ? `<div class="kortlista">${poster.map((p) => kort(p, typ)).join("")}</div>` : `<p class="tomt">${tom}</p>`;
 
 // ---------- layout ----------
@@ -181,6 +195,7 @@ ${site.indexera ? "" : '<meta name="robots" content="noindex, nofollow">\n'}<lin
 <meta property="og:title" content="${esc(helTitel)}">
 <meta property="og:description" content="${esc(beskrivning || site.beskrivning)}">
 <meta property="og:type" content="website">
+<meta property="og:image" content="${site.url}/bilder/emelie-kavaj.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -242,6 +257,7 @@ const platshallare = {
   epost: () => esc(site.epost),
   svarstid: () => esc(site.svarstid),
   siffror,
+  galleri,
   tidigare_samarbeten: tidigareSamarbeten,
   senaste_blogg: () => lista(blogg.slice(0, 3), "blogg", "Första inlägget kommer snart."),
   senaste_avsnitt: () => lista(podd.slice(0, 3), "podd", "Första avsnittet är på väg. Skriv upp dig på nyhetsbrevet så får du veta när det släpps."),
