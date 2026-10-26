@@ -1,0 +1,15 @@
+Ämne: Nytt avsnitt: om att börja om
+
+{{halsning}}
+
+Det här är ett exempel på ett brev. Det publiceras i arkivet på /nyhetsbrev/ och blir samtidigt en textfil i mappen `utskick/`, färdig att skicka till listan.
+
+Skriv som till en vän. Avsluta gärna med en länk till veckans avsnitt eller inlägg.
+
+Kram,
+Emelie
+
+Läs på webben: https://emeliebergqvist.com/nyhetsbrev/exempel-brev/
+
+--
+Du får det här för att du anmälde dig till nyhetsbrevet på emeliebergqvist.com. Vill du inte ha fler mejl? Avsluta här: {{avregistrera_lank}}

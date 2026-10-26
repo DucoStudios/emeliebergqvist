@@ -1,0 +1,33 @@
+{
+  "namn": "Emelie Bergqvist",
+  "url": "https://emeliebergqvist.com",
+  "bas": "/emeliebergqvist",
+  "beskrivning": "Podd, blogg och nyhetsbrev om livet i Frankrike, tro och vardag. Av Emelie Bergqvist.",
+  "indexera": false,
+  "forhandsvisning": true,
+  "api": "https://portal.ducomaison.fr/api/list/subscribe",
+  "konto": "emelie",
+  "epost": "hej@emeliebergqvist.com",
+
+  "podd": {
+    "namn": "",
+    "spotify": "",
+    "apple": "",
+    "youtube": ""
+  },
+  "instagram": {
+    "namn": "Bonjour Life",
+    "url": ""
+  },
+
+  "siffror": [
+    { "varde": "", "etikett": "följare på Instagram" },
+    { "varde": "", "etikett": "genomsnittlig räckvidd per Reel" },
+    { "varde": "", "etikett": "engagemang" },
+    { "varde": "", "etikett": "lyssningar per avsnitt" },
+    { "varde": "", "etikett": "kvinnor i publiken" },
+    { "varde": "", "etikett": "prenumeranter på nyhetsbrevet" }
+  ],
+  "tidigareSamarbeten": [],
+  "svarstid": "inom tre vardagar"
+}
