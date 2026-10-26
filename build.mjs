@@ -205,7 +205,7 @@ ${site.indexera ? "" : '<meta name="robots" content="noindex, nofollow">\n'}<lin
 <a class="hoppa" href="#innehall">Till innehållet</a>
 <header class="sidhuvud"><div class="inner">
   <a class="logga" href="/">Emelie Bergqvist</a>
-  <button class="meny-knapp" aria-expanded="false" aria-controls="meny">Meny</button>
+  <button class="meny-knapp" aria-expanded="false" aria-controls="meny"><span class="meny-ikon" aria-hidden="true"></span><span class="meny-text">Meny</span></button>
   <nav id="meny">
     <a href="/podd/"${aktiv("podd")}>Podd</a>
     <a href="/blogg/"${aktiv("blogg")}>Blogg</a>

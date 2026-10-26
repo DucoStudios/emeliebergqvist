@@ -9,10 +9,17 @@
   var giltig = function (e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); };
 
   var knapp = document.querySelector(".meny-knapp"), meny = document.getElementById("meny");
-  if (knapp && meny) knapp.addEventListener("click", function () {
-    var oppen = meny.classList.toggle("oppen");
+  function visaMeny(oppen) {
+    meny.classList.toggle("oppen", oppen);
+    body.classList.toggle("meny-oppen", oppen);
     knapp.setAttribute("aria-expanded", oppen ? "true" : "false");
-  });
+    knapp.querySelector(".meny-text").textContent = oppen ? "Stäng" : "Meny";
+  }
+  if (knapp && meny) {
+    knapp.addEventListener("click", function () { visaMeny(!meny.classList.contains("oppen")); });
+    meny.addEventListener("click", function (e) { if (e.target.closest("a")) visaMeny(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") visaMeny(false); });
+  }
 
   function skicka(data) {
     if (FORHANDSVISNING) { console.info("Förhandsvisning, skickas inte:", data); return new Promise(function (r) { setTimeout(r, 500); }); }
