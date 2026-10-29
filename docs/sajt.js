@@ -49,7 +49,7 @@
       var kalla = new URLSearchParams(location.search).get("src") || form.dataset.kalla || "webb";
       skicka({ konto: form.dataset.konto, magnet: form.dataset.magnet, email: email, namn: form.namn.value.trim() || undefined, samtycke: true, kalla: kalla, webbplats: form.webbplats.value || undefined })
         .then(function () {
-          form.innerHTML = '<div class="formular-tack"><h3>Kolla din inkorg</h3><p>Jag har skickat ett mejl till ' + email.replace(/</g, "") + '. Klicka på länken i det så är du med. Hittar du det inte, titta i skräpposten.</p>' + (FORHANDSVISNING ? '<p class="liten">Förhandsvisning: inget skickades.</p>' : "") + "</div>";
+          form.innerHTML = '<div class="formular-tack"><h3>Tack!</h3><p>Jag har tagit emot din anmälan med ' + email.replace(/</g, "") + '. Du får ett mejl med en länk att klicka på för att bekräfta. Hittar du det inte, titta i skräpposten.</p>' + (FORHANDSVISNING ? '<p class="liten">Förhandsvisning: inget skickades.</p>' : "") + "</div>";
         })
         .catch(function () { upptagen(form, false); svar(form, "Något gick fel. Försök igen om en stund."); });
     });

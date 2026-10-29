@@ -5,7 +5,7 @@
   "doman": "emeliebergqvist.com",
   "beskrivning": "Podd, blogg och nyhetsbrev om livet i Frankrike, tro och vardag. Av Emelie Bergqvist.",
   "indexera": false,
-  "forhandsvisning": true,
+  "forhandsvisning": false,
   "api": "https://portal.ducomaison.fr/api/list/subscribe",
   "konto": "emelie",
   "epost": "hej@emeliebergqvist.com",
