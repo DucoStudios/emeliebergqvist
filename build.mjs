@@ -314,6 +314,44 @@ for (const p of podd) {
   sitemap.push(`podd/${p.slug}/`);
 }
 
+// Poddflödet (RSS) som Spotify och Apple Podcasts läser. Byggs när podden har ett namn;
+// avsnitt med ljudfil (läggs in av studion) kommer med. Omslaget ska vara 1400-3000 px kvadratiskt.
+if (site.podd.namn) {
+  const xml = (s) => esc(s).replace(/'/g, "&apos;");
+  const rfc = (d) => new Date(`${d}T07:00:00+01:00`).toUTCString();
+  const omslag = site.podd.omslag ? `${site.url}${site.podd.omslag}` : "";
+  const avsnitt = podd.filter((p) => p.ljud).map((p) => `  <item>
+    <title>${xml(p.titel)}</title>
+    <description><![CDATA[${somText(p.kropp).replace(/]]>/g, "")}]]></description>
+    <link>${site.url}/podd/${p.slug}/</link>
+    <guid isPermaLink="false">${xml(p.ljud)}</guid>
+    <pubDate>${rfc(p.datum)}</pubDate>
+    <enclosure url="${xml(p.ljud)}" length="${Number(p.ljud_bytes) || 0}" type="audio/mpeg"/>
+    <itunes:duration>${Number(p.sekunder) || 0}</itunes:duration>
+    <itunes:episode>${Number(p.nummer) || 1}</itunes:episode>
+    <itunes:explicit>false</itunes:explicit>
+  </item>`).join("\n");
+  mkdirSync(path.join(UT, "podd"), { recursive: true });
+  writeFileSync(path.join(UT, "podd", "feed.xml"), `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>${xml(site.podd.namn)}</title>
+  <link>${site.url}/podd/</link>
+  <atom:link href="${site.url}/podd/feed.xml" rel="self" type="application/rss+xml"/>
+  <language>sv</language>
+  <description>${xml(site.podd.beskrivning || site.beskrivning)}</description>
+  <itunes:author>${xml(site.namn)}</itunes:author>
+  <itunes:owner><itunes:name>${xml(site.namn)}</itunes:name><itunes:email>${xml(site.epost)}</itunes:email></itunes:owner>
+  ${omslag ? `<itunes:image href="${xml(omslag)}"/>` : ""}
+  <itunes:category text="${xml(site.podd.kategori || "Society & Culture")}"/>
+  <itunes:explicit>false</itunes:explicit>
+  <itunes:type>episodic</itunes:type>
+${avsnitt}
+</channel>
+</rss>
+`);
+}
+
 // Nyhetsbrev: webbversion + ren text i utskick/ att lägga in i CRM:et.
 const UTSKICK = path.join(ROT, "utskick");
 rmSync(UTSKICK, { recursive: true, force: true });
