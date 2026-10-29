@@ -8,6 +8,7 @@
   "forhandsvisning": false,
   "api": "https://portal.ducomaison.fr/api/list/subscribe",
   "konto": "emelie",
+  "studio": "/studio-demo/",
   "epost": "hej@emeliebergqvist.com",
 
   "podd": {

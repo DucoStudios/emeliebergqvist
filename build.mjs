@@ -226,7 +226,7 @@ ${kropp}
     <a href="/podd/">Podd</a><a href="/blogg/">Blogg</a><a href="/nyhetsbrev/">Nyhetsbrev</a><a href="/om/">Om</a><a href="/samarbeten/">För företag</a>
     ${site.instagram.url ? `<a href="${esc(site.instagram.url)}" rel="noopener">Instagram</a>` : ""}
   </nav>
-  <p class="liten">© ${new Date().getFullYear()} Emelie Bergqvist · <a href="mailto:${esc(site.epost)}">${esc(site.epost)}</a> · <a href="/integritet/">Integritet</a></p>
+  <p class="liten">© ${new Date().getFullYear()} Emelie Bergqvist · <a href="mailto:${esc(site.epost)}">${esc(site.epost)}</a> · <a href="/integritet/">Integritet</a>${site.studio ? ` · <a href="${esc(site.studio)}" rel="nofollow">Studio</a>` : ""}</p>
 </div></footer>
 <script src="/sajt.js?v=${BYGGE}" defer></script>
 </body>
