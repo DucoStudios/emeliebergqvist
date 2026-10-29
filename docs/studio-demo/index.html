@@ -9,6 +9,7 @@
 <title>Emelies studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* Prototyp av Emelies studio: bara gränssnitt med exempeldata, inget sparas eller skickas. */
@@ -44,11 +45,11 @@ h1, h2, h3 { font-family: var(--rubrik); color: var(--svart); font-weight: 500; 
 /* kort */
 .kort { background: var(--vit); border-radius: 18px; box-shadow: 0 1px 2px rgba(58,42,45,.05), 0 6px 20px rgba(58,42,45,.06); margin-bottom: 12px; overflow: hidden; width: 100%; text-align: left; display: block; }
 .kort-rad { display: flex; gap: 14px; align-items: center; padding: 12px; }
-.tumme { width: 64px; height: 64px; border-radius: 12px; flex: none; object-fit: cover; background: var(--linne); display: grid; place-items: center; font-size: 1.6rem; }
+.tumme { width: 64px; height: 64px; border-radius: 12px; flex: none; object-fit: cover; background: var(--linne); display: grid; place-items: center; font-size: 1.4rem; color: var(--rosa); }
 .kort-text { min-width: 0; flex: 1; }
 .kort-text b { display: block; color: var(--svart); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .kort-text small { color: var(--dampad); font-size: .82rem; }
-.pil { color: var(--puder); font-size: 1.4rem; }
+.pil { color: var(--puder); font-size: 1rem; }
 .tagg { display: inline-block; font-size: .7rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; background: var(--linne); color: var(--rosa-mork); margin-bottom: 3px; }
 .tagg.gron { background: #e3ebe2; color: var(--gron); }
 
@@ -62,13 +63,13 @@ h1, h2, h3 { font-family: var(--rubrik); color: var(--svart); font-weight: 500; 
 /* ladda upp */
 .stora { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .stor { background: var(--vit); border-radius: 20px; padding: 22px 14px; text-align: center; box-shadow: 0 6px 20px rgba(58,42,45,.06); display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; }
-.stor .ikon { width: 54px; height: 54px; border-radius: 50%; background: var(--linne); display: grid; place-items: center; font-size: 1.6rem; }
+.stor .ikon { width: 54px; height: 54px; border-radius: 50%; background: var(--linne); display: grid; place-items: center; font-size: 1.35rem; color: var(--rosa); }
 .stor b { color: var(--svart); }
 .stor small { color: var(--dampad); font-size: .78rem; line-height: 1.3; }
 .stor input { position: absolute; inset: 0; opacity: 0; width: 100%; cursor: pointer; }
 
 /* knappar */
-.knapp { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px; border-radius: 99px; background: var(--rosa); color: #fff; font-weight: 600; font-size: 1rem; }
+.knapp { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px; padding: 0 20px; white-space: nowrap; border-radius: 99px; background: var(--rosa); color: #fff; font-weight: 600; font-size: 1rem; }
 .knapp:active { transform: scale(.98); }
 .knapp.ljus { background: var(--vit); color: var(--rosa-mork); border: 1.5px solid var(--puder); }
 .knapp.gron { background: var(--gron); }
@@ -195,10 +196,10 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
   <section class="vy" id="vy-ladda">
     <div class="rubrikrad"><h2>Ladda upp</h2><span>Hamnar på Google Drive</span></div>
     <div class="stora">
-      <label class="stor"><span class="ikon">🎙️</span><b>Ljud</b><small>Poddinspelning</small><input type="file" accept="audio/*" data-typ="ljud" multiple></label>
-      <label class="stor"><span class="ikon">🎬</span><b>Video</b><small>Till Reels</small><input type="file" accept="video/*" data-typ="video" multiple></label>
-      <label class="stor"><span class="ikon">🌸</span><b>Bilder</b><small>Karuseller och blogg</small><input type="file" accept="image/*" data-typ="bilder" multiple></label>
-      <label class="stor"><span class="ikon">📄</span><b>Dokument</b><small>Anteckningar, avtal</small><input type="file" data-typ="dokument" multiple></label>
+      <label class="stor"><span class="ikon"><span class="fa-solid fa-microphone-lines"></span></span><b>Ljud</b><small>Poddinspelning</small><input type="file" accept="audio/*" data-typ="ljud" multiple></label>
+      <label class="stor"><span class="ikon"><span class="fa-solid fa-video"></span></span><b>Video</b><small>Till Reels</small><input type="file" accept="video/*" data-typ="video" multiple></label>
+      <label class="stor"><span class="ikon"><span class="fa-solid fa-images"></span></span><b>Bilder</b><small>Karuseller och blogg</small><input type="file" accept="image/*" data-typ="bilder" multiple></label>
+      <label class="stor"><span class="ikon"><span class="fa-solid fa-file-lines"></span></span><b>Dokument</b><small>Anteckningar, avtal</small><input type="file" data-typ="dokument" multiple></label>
     </div>
     <div id="uppladdning" hidden>
       <div class="rubrikrad"><h2>Dina filer</h2><span id="filantal"></span></div>
@@ -223,8 +224,8 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
   <section class="vy" id="vy-skriv">
     <div class="rubrikrad"><h2>Skriv</h2><span>Sparas automatiskt</span></div>
     <div class="knapprad">
-      <button class="knapp" data-ny="Nyhetsbrev">+ Nyhetsbrev</button>
-      <button class="knapp ljus" data-ny="Blogginlägg">+ Blogginlägg</button>
+      <button class="knapp" data-ny="Nyhetsbrev"><span class="fa-solid fa-plus"></span> Nyhetsbrev</button>
+      <button class="knapp ljus" data-ny="Blogginlägg"><span class="fa-solid fa-plus"></span> Blogginlägg</button>
     </div>
     <div class="rubrikrad"><h2>Utkast</h2><span></span></div>
     <div id="lista-utkast"></div>
@@ -245,7 +246,7 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
 </div></nav>
 
 <div class="blad" id="blad"><div class="blad-inner">
-  <div class="blad-topp"><button id="stang" aria-label="Stäng">✕</button><h2 id="blad-rubrik"></h2></div>
+  <div class="blad-topp"><button id="stang" aria-label="Stäng"><span class="fa-solid fa-xmark"></span></button><h2 id="blad-rubrik"></h2></div>
   <div id="blad-innehall"></div>
 </div><div class="blad-fot" id="blad-fot"></div></div>
 
@@ -261,10 +262,10 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
       gjort: "Jämnat ut ljudnivån, tagit bort brus och tre långa pauser, lagt på intro och outro." },
     { id: 2, typ: "reel", tagg: "Reel", titel: "Morgon på marknaden i Narbonne", sub: "0:24 · gjord av din video från tisdag", bild: B + "granden.jpg",
       textning: ["Tisdag morgon i <mark>Narbonne</mark>", "Färska fikon för 3 €", "Det här saknade jag i Sverige"],
-      caption: "Tisdagsmarknaden är min favoritstund i veckan 🍑 Vad skulle du köpa först?\n\n#livetifrankrike #narbonne #bonjourlife",
+      caption: "Tisdagsmarknaden är min favoritstund i veckan. Vad skulle du köpa först?\n\n#livetifrankrike #narbonne #bonjourlife",
       ljud: "Lugn akustisk gitarr eller ett franskt chanson-ljud som trendar. Lägg till det i Instagram när du publicerar." },
     { id: 3, typ: "karusell", tagg: "Karusell", titel: "5 saker ingen säger om att flytta till Frankrike", sub: "6 bilder", bild: B + "landskap.jpg",
-      slides: [{ t: "5 saker ingen säger om att flytta till Frankrike", text: true }, { b: B + "kakel.jpg", t: "1. Allt tar tre gånger längre tid" }, { b: B + "oleander.jpg", t: "2. Grannarna blir din familj" }, { b: B + "palm.jpg", t: "3. Lunchen är helig" }, { b: B + "vandring.jpg", t: "4. Du börjar gå överallt" }, { t: "Spara inlägget och skicka till någon som drömmer om Frankrike 💛", text: true }],
+      slides: [{ t: "5 saker ingen säger om att flytta till Frankrike", text: true }, { b: B + "kakel.jpg", t: "1. Allt tar tre gånger längre tid" }, { b: B + "oleander.jpg", t: "2. Grannarna blir din familj" }, { b: B + "palm.jpg", t: "3. Lunchen är helig" }, { b: B + "vandring.jpg", t: "4. Du börjar gå överallt" }, { t: "Spara inlägget och skicka till någon som drömmer om Frankrike", text: true }],
       caption: "Nummer två överraskade mig mest. Vilken känner du igen dig i?" },
     { id: 4, typ: "brev", tagg: "Nyhetsbrev", titel: "Nytt avsnitt: varför vi flyttade", sub: "Till prenumeranterna", bild: B + "emelie-luckor.jpg",
       amne: "Ämne: Den kvällen vi bestämde oss",
@@ -272,7 +273,7 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
   ];
   var pagar = [
     { tagg: "Reel", titel: "Vandring i vingårdarna", sub: "Klipper och textar", p: 60, bild: B + "vandring.jpg" },
-    { tagg: "Poddavsnitt", titel: "Avsnitt 2 (råinspelning)", sub: "Jämnar ut ljudet", p: 25, ikon: "🎙️" },
+    { tagg: "Poddavsnitt", titel: "Avsnitt 2 (råinspelning)", sub: "Jämnar ut ljudet", p: 25, ikon: "microphone-lines" },
     { tagg: "Blogginlägg", titel: "Vår första vinter", sub: "Putsar språket", p: 80, bild: B + "kanalen.jpg" }
   ];
   var klart = [
@@ -287,18 +288,18 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
   $("#halsning").textContent = timme < 10 ? "God morgon, Emelie" : timme < 17 ? "Hej Emelie" : "God kväll, Emelie";
 
   function toast(t) { var el = $("#toast"); el.textContent = t; el.classList.add("syns"); clearTimeout(toast.t); toast.t = setTimeout(function () { el.classList.remove("syns"); }, 2400); }
-  function tumme(x) { return x.bild ? '<img class="tumme" src="' + x.bild + '" alt="">' : '<span class="tumme">' + (x.ikon || "📄") + "</span>"; }
+  function tumme(x) { return x.bild ? '<img class="tumme" src="' + x.bild + '" alt="">' : '<span class="tumme"><span class="fa-solid fa-' + (x.ikon || "file-lines") + '"></span></span>'; }
   function kort(x, extra) {
-    return '<div class="kort-rad">' + tumme(x) + '<div class="kort-text"><span class="tagg' + (extra === "gron" ? " gron" : "") + '">' + esc(x.tagg) + "</span><b>" + esc(x.titel) + "</b><small>" + esc(x.sub) + "</small>" + (extra && extra !== "gron" ? extra : "") + "</div>" + (extra ? "" : '<span class="pil">›</span>') + "</div>";
+    return '<div class="kort-rad">' + tumme(x) + '<div class="kort-text"><span class="tagg' + (extra === "gron" ? " gron" : "") + '">' + esc(x.tagg) + "</span><b>" + esc(x.titel) + "</b><small>" + esc(x.sub) + "</small>" + (extra && extra !== "gron" ? extra : "") + "</div>" + (extra ? "" : '<span class="pil"><span class="fa-solid fa-chevron-right"></span></span>') + "</div>";
   }
 
   function rita() {
-    $("#lista-granska").innerHTML = granska.length ? granska.map(function (x) { return '<button class="kort" data-id="' + x.id + '">' + kort(x) + "</button>"; }).join("") : '<div class="tom">Allt är granskat 🌸<br><span class="liten">Jag hör av mig när nästa sak är klar.</span></div>';
+    $("#lista-granska").innerHTML = granska.length ? granska.map(function (x) { return '<button class="kort" data-id="' + x.id + '">' + kort(x) + "</button>"; }).join("") : '<div class="tom">Allt är granskat<br><span class="liten">Jag hör av mig när nästa sak är klar.</span></div>';
     $("#antal-granska").textContent = granska.length ? granska.length + " väntar på dig" : "";
     $("#bricka").textContent = granska.length || "";
     $("#lista-pagar").innerHTML = pagar.length ? pagar.map(function (x) { return '<div class="kort">' + kort(x, '<div class="stapel"><i style="width:' + x.p + '%"></i></div>') + "</div>"; }).join("") : '<div class="tom" style="width:100%">Inget just nu</div>';
     $("#lista-klart").innerHTML = klart.map(function (x) { return '<div class="kort">' + kort({ tagg: x.var, titel: x.titel, sub: x.tagg + " · " + x.sub, bild: x.bild, ikon: x.ikon }, "gron") + "</div>"; }).join("");
-    $("#lista-utkast").innerHTML = utkast.length ? utkast.map(function (u, i) { return '<button class="kort" data-utkast="' + i + '">' + kort({ tagg: u.typ, titel: u.titel || "Utan rubrik", sub: "Ändrat " + u.andrad, ikon: u.typ === "Nyhetsbrev" ? "💌" : "✍️" }) + "</button>"; }).join("") : '<div class="tom">Inga utkast</div>';
+    $("#lista-utkast").innerHTML = utkast.length ? utkast.map(function (u, i) { return '<button class="kort" data-utkast="' + i + '">' + kort({ tagg: u.typ, titel: u.titel || "Utan rubrik", sub: "Ändrat " + u.andrad, ikon: u.typ === "Nyhetsbrev" ? "envelope-open-text" : "pen-nib" }) + "</button>"; }).join("") : '<div class="tom">Inga utkast</div>';
   }
 
   // flikar
@@ -319,14 +320,14 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
   function spelare(x) {
     var staplar = ""; for (var i = 0; i < 48; i++) staplar += '<i style="height:' + (20 + Math.abs(Math.sin(i * 1.7) * 60 + Math.sin(i * .4) * 20)) + '%"></i>';
     return '<div class="spelare"><div class="omslag-wrap"><img class="omslag" src="' + x.bild + '" alt=""><div class="poddnamn">Poddens namn<br><em style="font-size:1.1rem">med Emelie Bergqvist</em></div></div>' +
-      '<div class="reglage"><button class="spela" id="spela">▶</button><div style="flex:1"><div class="vag" id="vag">' + staplar + '</div><div class="tid"><span id="tid">0:00</span><span>42:10</span></div></div></div>' +
+      '<div class="reglage"><button class="spela" id="spela"><span class="fa-solid fa-play"></span></button><div style="flex:1"><div class="vag" id="vag">' + staplar + '</div><div class="tid"><span id="tid">0:00</span><span>42:10</span></div></div></div>' +
       '<div class="kapitel">' + x.kapitel.map(function (k) { return "<div><span>" + k[0] + "</span>" + esc(k[1]) + "</div>"; }).join("") + "</div></div>" +
       '<div class="text-block"><h3>Beskrivning till Spotify</h3>' + esc(x.beskrivning) + "</div>" +
       '<div class="text-block"><h3>Det här har jag gjort</h3>' + esc(x.gjort) + "</div>";
   }
   function reel(x) {
-    return '<div class="reel" id="reel"><img src="' + x.bild + '" alt=""><div class="textning" id="textning">' + x.textning[0] + '</div><button class="spela" id="spela">▶</button></div>' +
-      '<div class="ljudtips">🎵 <b>Ljud:</b> ' + esc(x.ljud) + "</div>" +
+    return '<div class="reel" id="reel"><img src="' + x.bild + '" alt=""><div class="textning" id="textning">' + x.textning[0] + '</div><button class="spela" id="spela"><span class="fa-solid fa-play"></span></button></div>' +
+      '<div class="ljudtips"><span class="fa-solid fa-music"></span> <b>Ljud:</b> ' + esc(x.ljud) + "</div>" +
       '<div class="text-block"><h3>Bildtext</h3>' + esc(x.caption).replace(/\n/g, "<br>") + "</div>";
   }
   function karusell(x) {
@@ -337,7 +338,7 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
   function brev(x) {
     return '<div class="brev"><div class="amne">' + esc(x.amne) + '</div><h3>' + esc(x.titel) + '</h3><img src="' + x.bild + '" alt="">' + esc(x.text).replace(/\n\n/g, "</p><p>").replace(/^/, "<p>").replace(/\n/g, "<br>") + "</p></div>";
   }
-  var andraHtml = '<div class="andra" id="andra"><label class="falt"><span>Vad ska jag ändra?</span><textarea class="inmatning" id="andra-text" placeholder="T.ex. klipp bort biten om skolan, och gör titeln kortare"></textarea></label><button class="mik" id="mik"><i>🎤</i>Eller tala in det</button></div>';
+  var andraHtml = '<div class="andra" id="andra"><label class="falt"><span>Vad ska jag ändra?</span><textarea class="inmatning" id="andra-text" placeholder="T.ex. klipp bort biten om skolan, och gör titeln kortare"></textarea></label><button class="mik" id="mik"><i><span class="fa-solid fa-microphone"></span></i>Eller tala in det</button></div>';
 
   document.addEventListener("click", function (e) {
     var k = e.target.closest("[data-id]");
@@ -350,13 +351,13 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
 
   function granskaItem(x) {
     var html = x.typ === "podd" ? spelare(x) : x.typ === "reel" ? reel(x) : x.typ === "karusell" ? karusell(x) : brev(x);
-    var godkann = x.typ === "brev" ? "Godkänn och skicka" : x.typ === "podd" ? "Godkänn och publicera" : "Godkänn";
+    var godkann = '<span class="fa-solid fa-check"></span> Godkänn';
     oppna(x.tagg, '<p class="liten" style="margin:0 0 12px">' + esc(x.titel) + "</p>" + html + andraHtml,
-      '<div class="knapprad"><button class="knapp ljus" id="b-andra">Ändra</button><button class="knapp gron" id="b-ok">' + godkann + "</button></div>");
+      '<div class="knapprad"><button class="knapp ljus" id="b-andra"><span class="fa-solid fa-pen"></span> Ändra</button><button class="knapp gron" id="b-ok">' + godkann + "</button></div>");
     var spelar = false, s = 0;
     var spela = $("#spela");
     if (spela) spela.addEventListener("click", function () {
-      spelar = !spelar; spela.textContent = spelar ? "❚❚" : "▶";
+      spelar = !spelar; spela.innerHTML = '<span class="fa-solid fa-' + (spelar ? "pause" : "play") + '"></span>';
       var r = $("#reel"); if (r) r.classList.toggle("spelar", spelar);
       clearInterval(spelTimer);
       if (spelar) spelTimer = setInterval(function () {
@@ -369,7 +370,7 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
     if (kar) kar.addEventListener("scroll", function () { var i = Math.round(kar.scrollLeft / (kar.firstChild.offsetWidth + 10)); document.querySelectorAll("#prickar i").forEach(function (p, j) { p.classList.toggle("pa", i === j); }); });
     $("#b-andra").addEventListener("click", function () {
       var a = $("#andra");
-      if (!a.classList.contains("syns")) { a.classList.add("syns"); $("#andra-text").focus(); this.textContent = "Skicka ändringen"; return; }
+      if (!a.classList.contains("syns")) { a.classList.add("syns"); $("#andra-text").focus(); this.innerHTML = '<span class="fa-solid fa-paper-plane"></span> Skicka'; return; }
       if (!$("#andra-text").value.trim()) return toast("Skriv vad jag ska ändra");
       granska = granska.filter(function (y) { return y !== x; });
       pagar.unshift({ tagg: x.tagg, titel: x.titel, sub: "Gör dina ändringar", p: 10, bild: x.bild });
@@ -381,7 +382,7 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
       var dit = { podd: "Spotify och Apple", reel: "Redo för Instagram", karusell: "Redo för Instagram", brev: "Nyhetsbrevet" }[x.typ];
       klart.unshift({ tagg: x.tagg, titel: x.titel, sub: "Godkänd nyss", var: dit, bild: x.bild });
       stang(); rita();
-      toast(x.typ === "brev" ? "Skickas till dina prenumeranter 💌" : x.typ === "podd" ? "Publiceras på Spotify 🎧" : "Godkänd! Ligger i Publicerat");
+      toast(x.typ === "brev" ? "Skickas till dina prenumeranter" : x.typ === "podd" ? "Publiceras på Spotify" : "Godkänd! Ligger i Publicerat");
     });
   }
 
@@ -393,18 +394,18 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
       '<label class="falt"><span>Rubrik</span><input class="inmatning" id="s-titel" value="' + esc(u.titel) + '" placeholder="Vad handlar det om?"></label>' +
       '<label class="falt"><span>Text</span><textarea class="inmatning lang" id="s-text" placeholder="Skriv som du pratar. Jag putsar språket och gör det snyggt.">' + esc(u.text) + "</textarea></label>" +
       '<div class="sparat" id="sparat"></div>' +
-      '<label class="falt"><span>Bilder</span></label><div class="bildrad" id="s-bilder">' + bilder + '<label>+<input type="file" accept="image/*" multiple id="s-fil"></label></div>',
+      '<label class="falt"><span>Bilder</span></label><div class="bildrad" id="s-bilder">' + bilder + '<label><span class="fa-solid fa-plus"></span><input type="file" accept="image/*" multiple id="s-fil"></label></div>',
       '<div class="knapprad"><button class="knapp ljus" id="s-spara">Spara utkast</button><button class="knapp" id="s-klar">Klar, putsa det</button></div>');
     var typ = u.typ;
     document.querySelectorAll(".segment button").forEach(function (b) { b.addEventListener("click", function () { typ = b.dataset.t; document.querySelectorAll(".segment button").forEach(function (c) { c.classList.toggle("vald", c === b); }); $("#blad-rubrik").textContent = typ; }); });
-    var t; ["#s-titel", "#s-text"].forEach(function (s) { $(s).addEventListener("input", function () { $("#sparat").textContent = ""; clearTimeout(t); t = setTimeout(function () { $("#sparat").textContent = "✓ Sparat"; }, 700); }); });
+    var t; ["#s-titel", "#s-text"].forEach(function (s) { $(s).addEventListener("input", function () { $("#sparat").textContent = ""; clearTimeout(t); t = setTimeout(function () { $("#sparat").textContent = "Sparat"; }, 700); }); });
     $("#s-fil").addEventListener("change", function () { var rad = $("#s-bilder"); Array.prototype.forEach.call(this.files, function (f) { var img = document.createElement("img"); img.src = URL.createObjectURL(f); rad.insertBefore(img, rad.lastChild); }); });
     function spara() { var d = { typ: typ, titel: $("#s-titel").value.trim(), text: $("#s-text").value, andrad: "nyss" }; if (idx >= 0) utkast[idx] = d; else utkast.unshift(d); return d; }
     $("#s-spara").addEventListener("click", function () { spara(); stang(); rita(); toast("Utkastet är sparat"); });
     $("#s-klar").addEventListener("click", function () {
       if (!$("#s-text").value.trim()) return toast("Skriv lite text först");
       var d = spara(); utkast = utkast.filter(function (x) { return x !== d; });
-      pagar.unshift({ tagg: typ, titel: d.titel || "Utan rubrik", sub: "Putsar språket", p: 15, ikon: typ === "Nyhetsbrev" ? "💌" : "✍️" });
+      pagar.unshift({ tagg: typ, titel: d.titel || "Utan rubrik", sub: "Putsar språket", p: 15, ikon: typ === "Nyhetsbrev" ? "envelope-open-text" : "pen-nib" });
       stang(); rita(); visa("granska"); toast("Tack! Du får granska det snart");
     });
   }
@@ -423,7 +424,7 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
   });
   function ritaFiler() {
     $("#filantal").textContent = valda.length + (valda.length === 1 ? " fil" : " filer");
-    $("#filer").innerHTML = valda.map(function (f) { return '<div class="filrad"><span>' + { ljud: "🎙️", video: "🎬", bilder: "🌸", dokument: "📄" }[f.typ] + '</span><span class="namn">' + esc(f.namn) + "</span>" + (f.p >= 100 ? '<span class="bock">✓</span>' : '<div class="stapel"><i style="width:' + f.p + '%"></i></div>') + "</div>"; }).join("");
+    $("#filer").innerHTML = valda.map(function (f) { return '<div class="filrad"><span class="fa-solid fa-' + { ljud: "microphone-lines", video: "video", bilder: "images", dokument: "file-lines" }[f.typ] + '" style="color:var(--rosa)"></span><span class="namn">' + esc(f.namn) + "</span>" + (f.p >= 100 ? '<span class="bock fa-solid fa-check"></span>' : '<div class="stapel"><i style="width:' + f.p + '%"></i></div>') + "</div>"; }).join("");
     document.querySelectorAll("#gora .chip").forEach(function (c) { c.classList.toggle("vald", gora.indexOf(c.dataset.v) >= 0); });
     $("#skicka-upp").disabled = !valda.length || valda.some(function (f) { return f.p < 100; }) || !gora.length;
     $("#skicka-upp").textContent = valda.some(function (f) { return f.p < 100; }) ? "Laddar upp..." : "Skicka till Jean-Claude";
@@ -440,9 +441,9 @@ textarea.lang { min-height: 42vh; font-size: 17px; }
   document.querySelectorAll("#gora .chip").forEach(function (c) { c.addEventListener("click", function () { var i = gora.indexOf(c.dataset.v); if (i >= 0) gora.splice(i, 1); else gora.push(c.dataset.v); ritaFiler(); }); });
   $("#skicka-upp").addEventListener("click", function () {
     var besk = $("#beskrivning").value.trim();
-    gora.filter(function (g) { return g !== "Bara spara"; }).forEach(function (g) { pagar.unshift({ tagg: g, titel: besk || valda[0].namn, sub: "Precis mottaget", p: 5, ikon: { Poddavsnitt: "🎙️", Reel: "🎬", Karusell: "🌸", "Blogginlägg": "✍️" }[g] }); });
+    gora.filter(function (g) { return g !== "Bara spara"; }).forEach(function (g) { pagar.unshift({ tagg: g, titel: besk || valda[0].namn, sub: "Precis mottaget", p: 5, ikon: { Poddavsnitt: "microphone-lines", Reel: "video", Karusell: "images", "Blogginlägg": "pen-nib" }[g] }); });
     valda = []; gora = []; $("#beskrivning").value = ""; $("#uppladdning").hidden = true;
-    rita(); visa("granska"); toast("Tack! Jag sätter igång 💛");
+    rita(); visa("granska"); toast("Tack! Jag sätter igång");
   });
 
   rita();
