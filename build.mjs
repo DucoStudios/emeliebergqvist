@@ -343,7 +343,7 @@ if (site.podd.namn) {
   <language>sv</language>
   <description>${xml(site.podd.beskrivning || site.beskrivning)}</description>
   <itunes:author>${xml(site.namn)}</itunes:author>
-  <itunes:owner><itunes:name>${xml(site.namn)}</itunes:name><itunes:email>${xml(site.epost)}</itunes:email></itunes:owner>
+  <itunes:owner><itunes:name>${xml(site.namn)}</itunes:name><itunes:email>${xml(site.podd.epost || site.epost)}</itunes:email></itunes:owner>
   ${omslag ? `<itunes:image href="${xml(omslag)}"/>` : ""}
   <itunes:category text="${xml(site.podd.kategori || "Society & Culture")}"/>
   <itunes:explicit>false</itunes:explicit>

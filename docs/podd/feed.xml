@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Men du, jag måste berätta!</title>
+  <link>https://emeliebergqvist.com/podd/</link>
+  <atom:link href="https://emeliebergqvist.com/podd/feed.xml" rel="self" type="application/rss+xml"/>
+  <language>sv</language>
+  <description>Om livet som det är. Och allt det kan bli. Emelie Bergqvist berättar om livet i en liten by i södra Frankrike med tre barn, en hund och en man: vardagen, det roliga och ett och annat kaos.</description>
+  <itunes:author>Emelie Bergqvist</itunes:author>
+  <itunes:owner><itunes:name>Emelie Bergqvist</itunes:name><itunes:email>emelie.d.bergqvist@gmail.com</itunes:email></itunes:owner>
+  <itunes:image href="https://emeliebergqvist.com/podd-omslag.jpg"/>
+  <itunes:category text="Society &amp; Culture"/>
+  <itunes:explicit>false</itunes:explicit>
+  <itunes:type>episodic</itunes:type>
+
+</channel>
+</rss>

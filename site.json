@@ -10,25 +10,44 @@
   "konto": "emelie",
   "studio": "https://portal.ducomaison.fr/studio/",
   "epost": "hej@emeliebergqvist.com",
-
   "podd": {
-    "namn": "",
+    "namn": "Men du, jag måste berätta!",
     "spotify": "",
     "apple": "",
-    "youtube": ""
+    "youtube": "",
+    "beskrivning": "Om livet som det är. Och allt det kan bli. Emelie Bergqvist berättar om livet i en liten by i södra Frankrike med tre barn, en hund och en man: vardagen, det roliga och ett och annat kaos.",
+    "omslag": "/podd-omslag.jpg",
+    "epost": "emelie.d.bergqvist@gmail.com"
   },
   "instagram": {
     "namn": "Bonjour Life",
     "url": ""
   },
-
   "siffror": [
-    { "varde": "", "etikett": "följare på Instagram" },
-    { "varde": "", "etikett": "genomsnittlig räckvidd per Reel" },
-    { "varde": "", "etikett": "engagemang" },
-    { "varde": "", "etikett": "lyssningar per avsnitt" },
-    { "varde": "", "etikett": "kvinnor i publiken" },
-    { "varde": "", "etikett": "prenumeranter på nyhetsbrevet" }
+    {
+      "varde": "",
+      "etikett": "följare på Instagram"
+    },
+    {
+      "varde": "",
+      "etikett": "genomsnittlig räckvidd per Reel"
+    },
+    {
+      "varde": "",
+      "etikett": "engagemang"
+    },
+    {
+      "varde": "",
+      "etikett": "lyssningar per avsnitt"
+    },
+    {
+      "varde": "",
+      "etikett": "kvinnor i publiken"
+    },
+    {
+      "varde": "",
+      "etikett": "prenumeranter på nyhetsbrevet"
+    }
   ],
   "tidigareSamarbeten": [],
   "svarstid": "inom tre vardagar"
