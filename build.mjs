@@ -252,7 +252,6 @@ writeFileSync(path.join(UT, "robots.txt"), site.indexera ? `User-agent: *\nAllow
 
 const platshallare = {
   nyhetsbrev_formular: () => nyhetsbrevFormular("sida"),
-  nyhetsbrev_formular_botten: () => nyhetsbrevFormular("sida-botten"),
   nyhetsbrev_formular_hero: () => nyhetsbrevFormular("hem"),
   poddlankar: () => poddlankar(),
   poddnamn: () => esc(poddnamn),
