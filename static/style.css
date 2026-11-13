@@ -111,6 +111,8 @@ p { margin: 0 0 1em; }
 .kort { background: var(--vit); border-radius: var(--radie); overflow: hidden; text-decoration: none; color: inherit; border: 1px solid var(--linje); transition: transform .2s, box-shadow .2s; }
 .kort:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -18px rgb(75 49 54 / .35); }
 .kort img, .kort-bild { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; background: linear-gradient(160deg, var(--puder), var(--linne)); }
+.kort-ram { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: linear-gradient(160deg, var(--puder), var(--linne)); }
+.kort-ram img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--x, 50%) var(--y, 50%); transform: scale(var(--z, 1)); transform-origin: var(--x, 50%) var(--y, 50%); }
 .kort-text { padding: 20px 22px 24px; }
 .kort-text p:last-child { margin: 0; color: var(--dampad); font-size: .95rem; }
 
@@ -171,7 +173,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--r
   /* stor bild: omslaget över hela bredden med rubriken ovanpå */
   .mobil-storbild .har-bild { display: block; position: relative; width: 100%; padding: 0; margin-bottom: 40px; }
   .mobil-storbild .har-bild .omslag { margin: 0; }
-  .mobil-storbild .har-bild .omslag img { display: block; width: 100%; height: min(78vh, 760px); max-height: none; object-fit: cover; object-position: 50% 22%; border-radius: 0; }
+  .mobil-storbild .har-bild .omslag img { display: block; width: 100%; height: min(78vh, 760px); max-height: none; object-fit: cover; object-position: var(--x, 50%) var(--y, 22%); border-radius: 0; }
   .mobil-storbild .har-bild .huvud-text { position: absolute; inset: auto 0 0 0; width: auto; padding: 120px 16px clamp(28px, 5vw, 56px); background: linear-gradient(transparent, rgba(40,26,29,.72)); }
   .mobil-storbild .har-bild .huvud-text > div { width: min(720px, 100%); margin-inline: auto; }
   .mobil-storbild .har-bild h1 { color: #fff; }
@@ -180,7 +182,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--r
   .mobil-magasin .har-bild { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(20px, 5vw, 64px); align-items: center; width: min(1120px, 100% - 32px); }
   .mobil-magasin .har-bild .huvud-text { width: auto; }
   .mobil-magasin .har-bild .omslag { margin: 0; }
-  .mobil-magasin .har-bild .omslag img { width: 100%; max-height: min(72vh, 640px); object-fit: cover; }
+  .mobil-magasin .har-bild .omslag img { width: 100%; max-height: min(72vh, 640px); object-fit: cover; object-position: var(--x, 50%) var(--y, 50%); }
   .mobil-magasin .brodtext figure { width: 46%; margin: 6px 0 14px; }
   .mobil-magasin .brodtext figure:nth-of-type(odd) { float: left; margin-right: clamp(14px, 3vw, 28px); }
   .mobil-magasin .brodtext figure:nth-of-type(even) { float: right; margin-left: clamp(14px, 3vw, 28px); }
@@ -196,7 +198,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--r
   /* stor bild: omslaget över hela bredden med rubriken ovanpå */
   .dator-storbild .har-bild { display: block; position: relative; width: 100%; padding: 0; margin-bottom: 40px; }
   .dator-storbild .har-bild .omslag { margin: 0; }
-  .dator-storbild .har-bild .omslag img { display: block; width: 100%; height: min(78vh, 760px); max-height: none; object-fit: cover; object-position: 50% 22%; border-radius: 0; }
+  .dator-storbild .har-bild .omslag img { display: block; width: 100%; height: min(78vh, 760px); max-height: none; object-fit: cover; object-position: var(--x, 50%) var(--y, 22%); border-radius: 0; }
   .dator-storbild .har-bild .huvud-text { position: absolute; inset: auto 0 0 0; width: auto; padding: 120px 16px clamp(28px, 5vw, 56px); background: linear-gradient(transparent, rgba(40,26,29,.72)); }
   .dator-storbild .har-bild .huvud-text > div { width: min(720px, 100%); margin-inline: auto; }
   .dator-storbild .har-bild h1 { color: #fff; }
@@ -205,7 +207,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--r
   .dator-magasin .har-bild { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(20px, 5vw, 64px); align-items: center; width: min(1120px, 100% - 32px); }
   .dator-magasin .har-bild .huvud-text { width: auto; }
   .dator-magasin .har-bild .omslag { margin: 0; }
-  .dator-magasin .har-bild .omslag img { width: 100%; max-height: min(72vh, 640px); object-fit: cover; }
+  .dator-magasin .har-bild .omslag img { width: 100%; max-height: min(72vh, 640px); object-fit: cover; object-position: var(--x, 50%) var(--y, 50%); }
   .dator-magasin .brodtext figure { width: 46%; margin: 6px 0 14px; }
   .dator-magasin .brodtext figure:nth-of-type(odd) { float: left; margin-right: clamp(14px, 3vw, 28px); }
   .dator-magasin .brodtext figure:nth-of-type(even) { float: right; margin-left: clamp(14px, 3vw, 28px); }

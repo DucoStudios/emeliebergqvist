@@ -154,11 +154,20 @@ function tidigareSamarbeten() {
   return `<div class="loggor"><p class="overrubrik">Har samarbetat med</p><ul>${site.tidigareSamarbeten.map((n) => `<li>${esc(n)}</li>`).join("")}</ul></div>`;
 }
 
+// Utsnitt för omslagsbilden (frontmatter "bild_utsnitt: x y zoom", väljs i Emelies studio): x och y är
+// procent för vad som ska synas, zoom 1-3. Används på bloggkortens miniatyr; punkten används också
+// där omslaget beskärs i artikeln (stor bild, magasin).
+function utsnitt(p) {
+  const [x, y, z] = String(p.bild_utsnitt ?? "").split(/\s+/).map(Number);
+  if (![x, y].every((v) => Number.isFinite(v) && v >= 0 && v <= 100)) return "";
+  return `--x:${x}%;--y:${y}%;--z:${Number.isFinite(z) && z >= 1 && z <= 3 ? z : 1}`;
+}
+
 function kort(p, typ) {
   const href = `/${typ}/${p.slug}/`;
   const ovan = typ === "podd" ? `Avsnitt ${esc(p.nummer ?? "")}` : datum(p.datum);
   return `<a class="kort" href="${href}">
-  ${p.bild ? `<img src="${esc(p.bild)}" alt="" loading="lazy">` : `<div class="kort-bild" aria-hidden="true"></div>`}
+  ${p.bild ? `<span class="kort-ram"${utsnitt(p) ? ` style="${utsnitt(p)}"` : ""}><img src="${esc(p.bild)}" alt="" loading="lazy"></span>` : `<div class="kort-bild" aria-hidden="true"></div>`}
   <div class="kort-text"><p class="overrubrik">${ovan}${p.utkast ? " · UTKAST" : ""}</p><h3>${esc(p.titel)}</h3><p>${esc(p.beskrivning ?? "")}</p></div>
 </a>`;
 }
@@ -295,7 +304,7 @@ function artikel(p, typ, extra = "") {
   const bilder = typ === "blogg" ? p.kropp.split(/\n{2,}/).map((b) => b.trim()).filter((b) => /^!\[[^\]]*\]\([^)]+\)$/.test(b)) : [];
   const galleri = bilder.length && (mobil === "galleri" || dator === "galleri")
     ? `<div class="inner bred bildgalleri antal-${Math.min(bilder.length, 4)}">${bilder.map((b) => `<figure>${inline(b)}</figure>`).join("")}</div>` : "";
-  return `<article class="artikel mobil-${mobil} dator-${dator}">
+  return `<article class="artikel mobil-${mobil} dator-${dator}"${utsnitt(p) ? ` style="${utsnitt(p)}"` : ""}>
   <header class="artikel-huvud${p.bild ? " har-bild" : ""}">
     <div class="huvud-text"><div>
       <p class="overrubrik">${ovan}${p.utkast ? " · UTKAST" : ""}</p>
