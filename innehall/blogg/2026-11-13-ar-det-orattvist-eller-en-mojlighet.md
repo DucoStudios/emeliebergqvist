@@ -3,6 +3,7 @@ titel: Är det orättvist eller en möjlighet?
 datum: 2026-11-13
 beskrivning: Den första snön har fallit hemma i Sverige, och här i Languedoc är det sol och 17 grader. Några tankar om tacksamhet, orättvisa och den där drömmen du bär på inombords.
 bild: /bilder/blogg/ar-det-orattvist-eller-en-mojlighet--d38d89b1.jpg
+layout: magasin
 ---
 Den trettonde november föll den första snön i syrrans trädgård. Hon skickar en bild på barnen som leker i snön innan de ska iväg till skolan.
 
