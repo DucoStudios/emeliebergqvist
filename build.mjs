@@ -112,6 +112,13 @@ function skriv(sokvag, html) {
 // ---------- byggblock ----------
 
 const poddnamn = site.podd.namn || "Podden";
+// Podden kan döljas tills den släpps ("synlig": false under podd i site.json): inga poddsidor, inget flöde,
+// ingen meny- eller sidfotslänk. I sidorna försvinner <!--podd-->...<!--/podd-->, och {{podd:med podd|utan podd}}
+// väljer text. Sätt "synlig": true när den ska ut, så kommer allt tillbaka.
+const PODD_SYNLIG = site.podd.synlig !== false;
+const poddVal = (html) => String(html ?? "")
+  .replace(/<!--podd-->[\s\S]*?<!--\/podd-->/g, (block) => (PODD_SYNLIG ? block : ""))
+  .replace(/\{\{podd:([^|}]*)\|([^}]*)\}\}/g, (_, med, utan) => (PODD_SYNLIG ? med : utan));
 const harPoddLank = site.podd.spotify || site.podd.apple || site.podd.youtube;
 
 function poddlankar(extra = {}) {
@@ -133,7 +140,7 @@ function nyhetsbrevFormular(kalla = "webb") {
     <input id="nb-epost-${kalla}" name="email" type="email" placeholder="Din e-post" autocomplete="email" required>
     <button class="knapp" type="submit">Skriv upp mig</button>
   </div>
-  <label class="samtycke"><input type="checkbox" name="samtycke" required> <span>Ja, mejla mig när det kommer nya avsnitt och inlägg, och ibland ett personligt brev från Emelie. Jag kan avsluta när jag vill.</span></label>
+  <label class="samtycke"><input type="checkbox" name="samtycke" required> <span>Ja, mejla mig när det kommer ${PODD_SYNLIG ? "nya avsnitt och inlägg" : "nya inlägg"}, och ibland ett personligt brev från Emelie. Jag kan avsluta när jag vill.</span></label>
   <input class="honung" name="webbplats" tabindex="-1" autocomplete="off" aria-hidden="true">
   <p class="formular-svar" role="status"></p>
 </form>`;
@@ -218,7 +225,7 @@ ${site.indexera ? "" : '<meta name="robots" content="noindex, nofollow">\n'}<lin
   <a class="logga" href="/">Emelie Bergqvist</a>
   <button class="meny-knapp" aria-expanded="false" aria-controls="meny"><span class="meny-ikon" aria-hidden="true"></span><span class="meny-text">Meny</span></button>
   <nav id="meny">
-    <a href="/podd/"${aktiv("podd")}>Podd</a>
+    ${PODD_SYNLIG ? `<a href="/podd/"${aktiv("podd")}>Podd</a>` : ""}
     <a href="/blogg/"${aktiv("blogg")}>Blogg</a>
     <a href="/nyhetsbrev/"${aktiv("nyhetsbrev")}>Nyhetsbrev</a>
     <a href="/om/"${aktiv("om")}>Om</a>
@@ -234,7 +241,7 @@ ${kropp}
     <p>Livet i Frankrike, tro och vardag.</p>
   </div>
   <nav aria-label="Sidfot">
-    <a href="/podd/">Podd</a><a href="/blogg/">Blogg</a><a href="/nyhetsbrev/">Nyhetsbrev</a><a href="/om/">Om</a><a href="/samarbeten/">För företag</a>
+    ${PODD_SYNLIG ? `<a href="/podd/">Podd</a>` : ""}<a href="/blogg/">Blogg</a><a href="/nyhetsbrev/">Nyhetsbrev</a><a href="/om/">Om</a><a href="/samarbeten/">För företag</a>
     ${site.instagram.url ? `<a href="${esc(site.instagram.url)}" rel="noopener">Instagram</a>` : ""}
   </nav>
   <p class="liten">© ${new Date().getFullYear()} Emelie Bergqvist · <a href="mailto:${esc(site.epost)}">${esc(site.epost)}</a> · <a href="/integritet/">Integritet</a>${site.studio ? ` · <a href="${esc(site.studio)}" rel="nofollow">Studio</a>` : ""}</p>
@@ -278,13 +285,14 @@ const platshallare = {
     ? `<ul class="arkiv">${brev.map((b) => `<li><a href="/nyhetsbrev/${b.slug}/">${esc(b.titel)}</a> <span>${datum(b.datum)}</span></li>`).join("")}</ul>`
     : `<p class="tomt">Inga brev ännu. Det första kommer snart.</p>`
 };
-const fyllI = (html) => html.replace(/\{\{([a-z_]+)\}\}/g, (hel, namn) => (platshallare[namn] ? platshallare[namn]() : hel));
+const fyllI = (html) => poddVal(html).replace(/\{\{([a-z_]+)\}\}/g, (hel, namn) => (platshallare[namn] ? platshallare[namn]() : hel));
 
 const sitemap = [];
 for (const fil of readdirSync(path.join(ROT, "sidor")).filter((f) => f.endsWith(".html"))) {
   const { meta, kropp } = frontmatter(readFileSync(path.join(ROT, "sidor", fil), "utf8"));
   const sokvag = meta.sokvag ?? "";
-  skriv(sokvag || "", layout({ titel: meta.titel, beskrivning: meta.beskrivning, sokvag, kropp: fyllI(kropp), klass: meta.klass }));
+  if (!PODD_SYNLIG && sokvag.startsWith("podd")) continue;
+  skriv(sokvag || "", layout({ titel: meta.titel, beskrivning: poddVal(meta.beskrivning), sokvag, kropp: fyllI(kropp), klass: meta.klass }));
   if (!meta.dold) sitemap.push(sokvag);
 }
 
@@ -332,7 +340,7 @@ for (const p of blogg) {
   skriv(`blogg/${p.slug}/`, layout({ titel: p.titel, beskrivning: p.beskrivning, sokvag: `blogg/${p.slug}/`, kropp: artikel(p, "blogg") }));
   sitemap.push(`blogg/${p.slug}/`);
 }
-for (const p of podd) {
+for (const p of PODD_SYNLIG ? podd : []) {
   const spelare = [
     p.ljud ? `<audio controls preload="none" src="${esc(p.ljud)}"></audio>` : "",
     p.inbaddning ? `<div class="inbaddning">${p.inbaddning}</div>` : "",
@@ -344,7 +352,7 @@ for (const p of podd) {
 
 // Poddflödet (RSS) som Spotify och Apple Podcasts läser. Byggs när podden har ett namn;
 // avsnitt med ljudfil (läggs in av studion) kommer med. Omslaget ska vara 1400-3000 px kvadratiskt.
-if (site.podd.namn) {
+if (site.podd.namn && PODD_SYNLIG) {
   const xml = (s) => esc(s).replace(/'/g, "&apos;");
   const rfc = (d) => new Date(`${d}T07:00:00+01:00`).toUTCString();
   const omslag = site.podd.omslag ? `${site.url}${site.podd.omslag}` : "";

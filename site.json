@@ -11,6 +11,7 @@
   "studio": "https://portal.ducomaison.fr/studio/",
   "epost": "hej@emeliebergqvist.com",
   "podd": {
+    "synlig": false,
     "namn": "Men du, jag måste berätta!",
     "spotify": "",
     "apple": "",
