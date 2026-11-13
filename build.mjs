@@ -288,7 +288,7 @@ for (const fil of readdirSync(path.join(ROT, "sidor")).filter((f) => f.endsWith(
   if (!meta.dold) sitemap.push(sokvag);
 }
 
-// Blogginlägg har ett upplägg för mobilen och ett för datorn (frontmatter "layout_mobil" och "layout",
+// Blogginlägg och nyhetsbrev (arkivsidan) har ett upplägg för mobilen och ett för datorn (frontmatter "layout_mobil" och "layout",
 // väljs i Emelies studio). Samma HTML i alla fyra, CSS:en (static/style.css) gör skillnaden.
 //   klassisk  rubrik, omslag under, bilderna centrerade i texten
 //   storbild  omslaget över hela bredden med rubriken ovanpå
@@ -299,9 +299,10 @@ const STANDARD = { mobil: "klassisk", dator: "magasin" };
 function artikel(p, typ, extra = "") {
   const tillbaka = { blogg: ["/blogg/", "Alla inlägg"], podd: ["/podd/", "Alla avsnitt"], nyhetsbrev: ["/nyhetsbrev/", "Fler brev"] }[typ];
   const ovan = typ === "podd" ? `Avsnitt ${esc(p.nummer ?? "")} · ${datum(p.datum)}` : datum(p.datum);
-  const val = (v, std) => (typ === "blogg" && LAYOUTER.includes(v) ? v : typ === "blogg" ? std : "klassisk");
+  const medUpplagg = typ === "blogg" || typ === "nyhetsbrev";
+  const val = (v, std) => (medUpplagg && LAYOUTER.includes(v) ? v : medUpplagg ? std : "klassisk");
   const mobil = val(p.layout_mobil, STANDARD.mobil), dator = val(p.layout, STANDARD.dator);
-  const bilder = typ === "blogg" ? p.kropp.split(/\n{2,}/).map((b) => b.trim()).filter((b) => /^!\[[^\]]*\]\([^)]+\)$/.test(b)) : [];
+  const bilder = medUpplagg ? p.kropp.split(/\n{2,}/).map((b) => b.trim()).filter((b) => /^!\[[^\]]*\]\([^)]+\)$/.test(b)) : [];
   const galleri = bilder.length && (mobil === "galleri" || dator === "galleri")
     ? `<div class="inner bred bildgalleri antal-${Math.min(bilder.length, 4)}">${bilder.map((b) => `<figure>${inline(b)}</figure>`).join("")}</div>` : "";
   return `<article class="artikel mobil-${mobil} dator-${dator}"${utsnitt(p) ? ` style="${utsnitt(p)}"` : ""}>
