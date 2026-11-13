@@ -279,21 +279,40 @@ for (const fil of readdirSync(path.join(ROT, "sidor")).filter((f) => f.endsWith(
   if (!meta.dold) sitemap.push(sokvag);
 }
 
+// Blogginlägg kan ha ett upplägg (frontmatter "layout", väljs i Emelies studio). Utan val: klassisk.
+//   klassisk  rubrik, omslag under, bilderna centrerade i texten
+//   storbild  omslaget över hela bredden med rubriken ovanpå
+//   magasin   rubrik och omslag bredvid varandra, bilderna i texten växelvis till vänster och höger
+//   galleri   som klassisk, men bilderna i texten samlas i ett rutnät efter texten
+const LAYOUTER = ["klassisk", "storbild", "magasin", "galleri"];
 function artikel(p, typ, extra = "") {
   const tillbaka = { blogg: ["/blogg/", "Alla inlägg"], podd: ["/podd/", "Alla avsnitt"], nyhetsbrev: ["/nyhetsbrev/", "Fler brev"] }[typ];
   const ovan = typ === "podd" ? `Avsnitt ${esc(p.nummer ?? "")} · ${datum(p.datum)}` : datum(p.datum);
-  return `<article class="artikel">
-  <header class="inner smal">
-    <p class="overrubrik">${ovan}${p.utkast ? " · UTKAST" : ""}</p>
+  const upplagg = typ === "blogg" && LAYOUTER.includes(p.layout) ? p.layout : "klassisk";
+  let kropp = p.kropp;
+  let galleriHtml = "";
+  if (upplagg === "galleri") {
+    const bilder = [];
+    kropp = kropp.split(/\n{2,}/).filter((b) => (/^!\[[^\]]*\]\([^)]+\)$/.test(b.trim()) ? (bilder.push(b.trim()), false) : true)).join("\n\n");
+    if (bilder.length) galleriHtml = `<div class="inner bred bildgalleri antal-${Math.min(bilder.length, 4)}">${bilder.map((b) => `<figure>${inline(b)}</figure>`).join("")}</div>`;
+  }
+  const omslag = p.bild ? `<figure class="omslag"><img src="${esc(p.bild)}" alt="${esc(p.bildtext ?? "")}"></figure>` : "";
+  const rubrik = `<p class="overrubrik">${ovan}${p.utkast ? " · UTKAST" : ""}</p>
     <h1>${esc(p.titel)}</h1>
-    ${p.beskrivning ? `<p class="ingress">${esc(p.beskrivning)}</p>` : ""}
-  </header>
-  ${p.bild ? `<figure class="inner bred"><img src="${esc(p.bild)}" alt="${esc(p.bildtext ?? "")}"></figure>` : ""}
+    ${p.beskrivning ? `<p class="ingress">${esc(p.beskrivning)}</p>` : ""}`;
+  const huvud = upplagg === "storbild" && p.bild
+    ? `<header class="storbild-huvud">${omslag}<div class="storbild-text"><div class="inner smal">${rubrik}</div></div></header>`
+    : upplagg === "magasin" && p.bild
+      ? `<header class="inner magasin-huvud"><div>${rubrik}</div>${omslag}</header>`
+      : `<header class="inner smal">${rubrik}</header>${p.bild ? omslag.replace('class="omslag"', 'class="omslag inner bred"') : ""}`;
+  return `<article class="artikel layout-${upplagg}">
+  ${huvud}
   <div class="inner smal brodtext">
     ${extra}
-    ${markdown(p.kropp)}
-    <p class="tillbaka"><a href="${tillbaka[0]}">← ${tillbaka[1]}</a></p>
+    ${markdown(kropp)}
   </div>
+  ${galleriHtml}
+  <div class="inner smal"><p class="tillbaka"><a href="${tillbaka[0]}">← ${tillbaka[1]}</a></p></div>
 </article>
 <section class="sektion sektion-ljus"><div class="inner smal center">
   <h2>Vill du ha nästa i inkorgen?</h2>

@@ -139,7 +139,46 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--r
 .artikel > header { padding-top: clamp(48px, 7vw, 88px); }
 .artikel figure { margin: 32px auto; }
 .artikel figure img { border-radius: var(--radie); }
-.brodtext { padding-bottom: 64px; }
+/* Stående mobilbilder får inte bli metervis höga på datorn: max en skärmhöjd, centrerade. */
+.artikel figure { text-align: center; }
+.artikel figure img { display: inline-block; width: auto; max-width: 100%; max-height: min(70vh, 620px); object-fit: contain; }
+.brodtext figure img { max-height: min(60vh, 500px); }
+.brodtext { padding-bottom: 8px; }
+.artikel .tillbaka { margin: 2.4em 0 64px; }
+
+/* Upplägg för blogginlägg (väljs i Emelies studio, se build.mjs) */
+.layout-storbild .storbild-huvud { position: relative; margin: 0 0 40px; }
+.layout-storbild .storbild-huvud .omslag { margin: 0; }
+.layout-storbild .storbild-huvud .omslag img { display: block; width: 100%; height: min(78vh, 760px); max-height: none; object-fit: cover; object-position: 50% 22%; border-radius: 0; }
+.layout-storbild .storbild-text { position: absolute; inset: auto 0 0 0; padding: 120px 0 clamp(28px, 5vw, 56px); background: linear-gradient(transparent, rgba(40,26,29,.72)); color: #fff; }
+.layout-storbild .storbild-text h1 { color: #fff; }
+.layout-storbild .storbild-text .overrubrik, .layout-storbild .storbild-text .ingress { color: rgba(255,255,255,.88); }
+
+.layout-magasin .magasin-huvud { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 64px); align-items: center; padding-top: clamp(48px, 7vw, 88px); margin-bottom: 24px; }
+.layout-magasin .magasin-huvud .omslag { margin: 0; }
+.layout-magasin .magasin-huvud .omslag img { width: 100%; max-height: min(72vh, 640px); object-fit: cover; }
+@media (min-width: 900px) {
+  .layout-magasin .brodtext figure { width: 46%; margin: 6px 0 18px; }
+  .layout-magasin .brodtext figure:nth-of-type(odd) { float: left; margin-right: 28px; margin-left: -12%; }
+  .layout-magasin .brodtext figure:nth-of-type(even) { float: right; margin-left: 28px; margin-right: -12%; }
+  .layout-magasin .brodtext figure img { width: 100%; max-height: 520px; object-fit: cover; }
+  .layout-magasin .brodtext h2, .layout-magasin .brodtext h3, .layout-magasin .brodtext::after { clear: both; }
+  .layout-magasin .brodtext::after { content: ""; display: block; }
+}
+
+.bildgalleri { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); margin-top: 32px; }
+.bildgalleri figure { margin: 0; }
+.bildgalleri figure img { display: block; width: 100%; height: 100%; max-height: none; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radie); }
+.bildgalleri.antal-1 { grid-template-columns: 1fr; width: min(720px, 100% - 32px); }
+.bildgalleri.antal-1 figure img { aspect-ratio: auto; max-height: 620px; }
+@media (min-width: 900px) {
+  .bildgalleri.antal-3 { grid-template-columns: repeat(3, 1fr); }
+  .bildgalleri.antal-4 { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 900px) {
+  .layout-magasin .magasin-huvud { grid-template-columns: 1fr; }
+  .layout-storbild .storbild-huvud .omslag img { height: 72vh; }
+}
 .brodtext h2 { font-size: 2rem; margin-top: 1.4em; }
 .brodtext h3 { margin-top: 1.4em; }
 .brodtext blockquote { margin: 1.6em 0; padding-left: 22px; border-left: 3px solid var(--rosa); font-family: var(--rubrik); font-size: 1.5rem; color: var(--black); }
