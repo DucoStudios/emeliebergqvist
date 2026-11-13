@@ -252,6 +252,7 @@ writeFileSync(path.join(UT, "robots.txt"), site.indexera ? `User-agent: *\nAllow
 
 const platshallare = {
   nyhetsbrev_formular: () => nyhetsbrevFormular("sida"),
+  nyhetsbrev_formular_botten: () => nyhetsbrevFormular("sida-botten"),
   nyhetsbrev_formular_hero: () => nyhetsbrevFormular("hem"),
   poddlankar: () => poddlankar(),
   poddnamn: () => esc(poddnamn),
@@ -279,39 +280,36 @@ for (const fil of readdirSync(path.join(ROT, "sidor")).filter((f) => f.endsWith(
   if (!meta.dold) sitemap.push(sokvag);
 }
 
-// Blogginlägg kan ha ett upplägg (frontmatter "layout", väljs i Emelies studio). Utan val: klassisk.
+// Blogginlägg har ett upplägg för mobilen och ett för datorn (frontmatter "layout_mobil" och "layout",
+// väljs i Emelies studio). Samma HTML i alla fyra, CSS:en (static/style.css) gör skillnaden.
 //   klassisk  rubrik, omslag under, bilderna centrerade i texten
 //   storbild  omslaget över hela bredden med rubriken ovanpå
 //   magasin   rubrik och omslag bredvid varandra, bilderna i texten växelvis till vänster och höger
-//   galleri   som klassisk, men bilderna i texten samlas i ett rutnät efter texten
+//   galleri   bilderna i texten samlas i ett rutnät efter texten
 const LAYOUTER = ["klassisk", "storbild", "magasin", "galleri"];
+const STANDARD = { mobil: "klassisk", dator: "magasin" };
 function artikel(p, typ, extra = "") {
   const tillbaka = { blogg: ["/blogg/", "Alla inlägg"], podd: ["/podd/", "Alla avsnitt"], nyhetsbrev: ["/nyhetsbrev/", "Fler brev"] }[typ];
   const ovan = typ === "podd" ? `Avsnitt ${esc(p.nummer ?? "")} · ${datum(p.datum)}` : datum(p.datum);
-  const upplagg = typ === "blogg" && LAYOUTER.includes(p.layout) ? p.layout : "klassisk";
-  let kropp = p.kropp;
-  let galleriHtml = "";
-  if (upplagg === "galleri") {
-    const bilder = [];
-    kropp = kropp.split(/\n{2,}/).filter((b) => (/^!\[[^\]]*\]\([^)]+\)$/.test(b.trim()) ? (bilder.push(b.trim()), false) : true)).join("\n\n");
-    if (bilder.length) galleriHtml = `<div class="inner bred bildgalleri antal-${Math.min(bilder.length, 4)}">${bilder.map((b) => `<figure>${inline(b)}</figure>`).join("")}</div>`;
-  }
-  const omslag = p.bild ? `<figure class="omslag"><img src="${esc(p.bild)}" alt="${esc(p.bildtext ?? "")}"></figure>` : "";
-  const rubrik = `<p class="overrubrik">${ovan}${p.utkast ? " · UTKAST" : ""}</p>
-    <h1>${esc(p.titel)}</h1>
-    ${p.beskrivning ? `<p class="ingress">${esc(p.beskrivning)}</p>` : ""}`;
-  const huvud = upplagg === "storbild" && p.bild
-    ? `<header class="storbild-huvud">${omslag}<div class="storbild-text"><div class="inner smal">${rubrik}</div></div></header>`
-    : upplagg === "magasin" && p.bild
-      ? `<header class="inner magasin-huvud"><div>${rubrik}</div>${omslag}</header>`
-      : `<header class="inner smal">${rubrik}</header>${p.bild ? omslag.replace('class="omslag"', 'class="omslag inner bred"') : ""}`;
-  return `<article class="artikel layout-${upplagg}">
-  ${huvud}
+  const val = (v, std) => (typ === "blogg" && LAYOUTER.includes(v) ? v : typ === "blogg" ? std : "klassisk");
+  const mobil = val(p.layout_mobil, STANDARD.mobil), dator = val(p.layout, STANDARD.dator);
+  const bilder = typ === "blogg" ? p.kropp.split(/\n{2,}/).map((b) => b.trim()).filter((b) => /^!\[[^\]]*\]\([^)]+\)$/.test(b)) : [];
+  const galleri = bilder.length && (mobil === "galleri" || dator === "galleri")
+    ? `<div class="inner bred bildgalleri antal-${Math.min(bilder.length, 4)}">${bilder.map((b) => `<figure>${inline(b)}</figure>`).join("")}</div>` : "";
+  return `<article class="artikel mobil-${mobil} dator-${dator}">
+  <header class="artikel-huvud${p.bild ? " har-bild" : ""}">
+    <div class="huvud-text"><div>
+      <p class="overrubrik">${ovan}${p.utkast ? " · UTKAST" : ""}</p>
+      <h1>${esc(p.titel)}</h1>
+      ${p.beskrivning ? `<p class="ingress">${esc(p.beskrivning)}</p>` : ""}
+    </div></div>
+    ${p.bild ? `<figure class="omslag"><img src="${esc(p.bild)}" alt="${esc(p.bildtext ?? "")}"></figure>` : ""}
+  </header>
   <div class="inner smal brodtext">
     ${extra}
-    ${markdown(kropp)}
+    ${markdown(p.kropp)}
   </div>
-  ${galleriHtml}
+  ${galleri}
   <div class="inner smal"><p class="tillbaka"><a href="${tillbaka[0]}">← ${tillbaka[1]}</a></p></div>
 </article>
 <section class="sektion sektion-ljus"><div class="inner smal center">
