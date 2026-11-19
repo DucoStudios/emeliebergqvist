@@ -7,7 +7,7 @@ layout: magasin
 layout_mobil: magasin
 bild_utsnitt: 60 53 1
 ---
-Bredvid den pampiga blåa dörren dukade Annelie och Johan fram ett helt fantastiskt fika. En mysig innergård mitt emellan stora träd och växter, som bara växer så där vackert i ett varmt land som det här.
+Bredvid den pampiga blåa dörren dukade Annelie och Johan fram ett helt fantastiskt fika. Vi är i Roquebrun och ska kolla deras fönsterluckor för renovering. En mysig liten innergård mitt emellan stora träd och växter, som bara växer så där vackert i ett varmt land som det här.
 
 Här, alltså i södra Frankrike, dit vi flyttade utan en aning om vad som väntade oss. (Och tur var väl det, för annars hade jag nog inte hoppat rakt ut utan ett team med både psykologer, mentorer och bönefolk. Eller också tagit med mamma och pappa att hålla i handen.)
 
