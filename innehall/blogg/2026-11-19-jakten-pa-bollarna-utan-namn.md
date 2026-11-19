@@ -1,7 +1,7 @@
 ---
 titel: Jakten på bollarna utan namn
 datum: 2026-11-19
-beskrivning: Ett fika på en innergård i Roquebrun väckte en längtan efter några små bakverk som vi inte ens visste namnet på. Så i helgen åkte vi tillbaka och letade upp dem.
+beskrivning: 
 bild: /bilder/blogg/jakten-pa-bollarna-utan-namn--467d796a.jpg
 layout: magasin
 layout_mobil: magasin
